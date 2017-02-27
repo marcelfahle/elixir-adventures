@@ -14,9 +14,9 @@ IO.puts func2.("", "", "last")
 
 IO.puts "======="
 
-IO.puts func3.(10)
-IO.puts func3.(11)
-IO.puts func3.(12)
+IO.puts func3.(10) 
+IO.puts func3.(11) 
+IO.puts func3.(12) 
 IO.puts func3.(13)
 IO.puts func3.(14)
 IO.puts func3.(15)
