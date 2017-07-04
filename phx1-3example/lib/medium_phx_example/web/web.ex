@@ -1,12 +1,12 @@
-defmodule Rumbl.Web do
+defmodule MediumPhxExample.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use Rumbl.Web, :controller
-      use Rumbl.Web, :view
+      use MediumPhxExample.Web, :controller
+      use MediumPhxExample.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -16,62 +16,41 @@ defmodule Rumbl.Web do
   below.
   """
 
-  def model do
-    quote do
-      use Ecto.Schema
-
-      import Ecto
-      import Ecto.Changeset
-      import Ecto.Query
-    end
-  end
-
   def controller do
     quote do
-      use Phoenix.Controller
-
-      alias Rumbl.Repo
-      import Ecto
-      import Ecto.Query
-
-      import Rumbl.Router.Helpers
-      import Rumbl.Gettext
-      import Rumbl.Auth, only: [authenticate_user: 2]
+      use Phoenix.Controller, namespace: MediumPhxExample.Web
+      import Plug.Conn
+      import MediumPhxExample.Web.Router.Helpers
+      import MediumPhxExample.Web.Gettext
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "web/templates"
+      use Phoenix.View, root: "lib/medium_phx_example/web/templates",
+                        namespace: MediumPhxExample.Web
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
 
-      # Use all HTML functionality (forms, tags, etc)
-      use Phoenix.HTML
-
-      import Rumbl.Router.Helpers
-      import Rumbl.ErrorHelpers
-      import Rumbl.Gettext
+      import MediumPhxExample.Web.Router.Helpers
+      import MediumPhxExample.Web.ErrorHelpers
+      import MediumPhxExample.Web.Gettext
     end
   end
 
   def router do
     quote do
       use Phoenix.Router
-
-      import Rumbl.Auth, only: [authenticate_user: 2]
+      import Plug.Conn
+      import Phoenix.Controller
     end
   end
 
   def channel do
     quote do
       use Phoenix.Channel
-
-      alias Rumbl.Repo
-      import Ecto
-      import Ecto.Query
-      import Rumbl.Gettext
+      import MediumPhxExample.Web.Gettext
     end
   end
 
